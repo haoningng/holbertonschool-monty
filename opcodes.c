@@ -9,8 +9,8 @@
  */
 void _push(stack_t **stack, unsigned int line_number)
 {
+	printf("testing..");
 	stack_t *new;
-	char *arg;
 	int converted_arg;
 
 	new = malloc(sizeof(stack_t));
@@ -19,7 +19,6 @@ void _push(stack_t **stack, unsigned int line_number)
 		fprintf(stderr, "Error: malloc failed\n");
 		exit(EXIT_FAILURE);
 	}
-	arg = strtok(NULL, "\n ");
 	if (isdigit(arg) == 0 && arg != NULL)
 	{
 		converted_arg = atoi(arg);

@@ -9,6 +9,8 @@
 #include <string.h>
 #include <unistd.h>
 
+extern char *arg;
+
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
  * @n: integer
@@ -39,11 +41,11 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-typedef void (*f)(stack_t **stack, unsigned int line_number);
+typedef void (*opcode_func)(stack_t **stack, unsigned int line_number);
 
 /* monty.c */
 void read_file(char* filename, stack_t **stack);
-f get_op_func(char *str);
+opcode_func get_op_func(char *str);
 
 /* opcodes.c */
 void _push(stack_t **stack, unsigned int line_number);
