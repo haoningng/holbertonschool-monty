@@ -40,8 +40,10 @@ void read_file(FILE *filePtr, stack_t **stack)
 		}
 		line_number++;
 	}
+
 	(void)func;
 	(void)stack;
+	free(buffer);
 }
 
 /**
