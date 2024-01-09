@@ -25,7 +25,7 @@ int main(int argc, char **argv)
 		exit(EXIT_FAILURE);
 	}
 	read_file(filePtr, &stack);
-	/*	free_dlistint(stack); */
+	free_dlistint(stack);
 	fclose(filePtr);
 	return (0);
 }
