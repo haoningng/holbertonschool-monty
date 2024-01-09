@@ -7,9 +7,9 @@
  *
  * Return: 0 if successful
  */
-int main(int argc, char** argv)
+int main(int argc, char **argv)
 {
-	stack_t *stack;	
+	stack_t *stack;
 
 	if (argc != 2)
 	{
@@ -17,6 +17,6 @@ int main(int argc, char** argv)
 		exit(EXIT_FAILURE);
 	}
 	read_file(argv[1], &stack);
-/*	free_dlistint(stack); */
+	/*	free_dlistint(stack); */
 	return (0);
 }
