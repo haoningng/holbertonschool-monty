@@ -26,13 +26,13 @@ void read_file(FILE *filePtr, stack_t **stack)
 			func = get_op_func(token);
 			if (func == NULL)
 			{
-				printf("func is null\n");
+				/*printf("func is null\n");*/
 				break;
 			}
 			else
 			{
-				printf("func is not null\n");
-				printf("%s\n", token);
+				/*printf("func is not null\n");
+				printf("%s\n", token);*/
 				token = strtok(NULL, " $");
 				arg = token;
 				func(stack, line_number);
