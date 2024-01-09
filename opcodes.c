@@ -31,3 +31,21 @@ void _push(stack_t **stack, unsigned int line_number)
 	}
 	add_dnodeint(stack, converted_arg);
 }
+
+/**
+ * _pall - pushes an element to the stack.
+ * @stack: doubly linked list to which the element is pushed
+ * @line_number: the line number in the monty script
+ *
+ * Return: Nothing
+ */
+void _pall(stack_t **stack, unsigned int line_number)
+{
+	stack_t *node = *stack;
+	(void)line_number;
+	while (node != NULL)
+	{
+		printf("%d\n", node->n);
+		node = node->next;
+	}
+}
