@@ -1,7 +1,7 @@
 #include "monty.h"
 
 /**
- * push - pushes an element to the stack.
+ * _push - pushes an element to the stack.
  * @stack: doubly linked list to which the element is pushed
  * @line_number: the line number in the monty script
  *
@@ -9,17 +9,18 @@
  */
 void _push(stack_t **stack, unsigned int line_number)
 {
-	printf("testing..");
 	stack_t *new;
 	int converted_arg;
 
 	new = malloc(sizeof(stack_t));
+
 	if (new == NULL)
 	{
 		fprintf(stderr, "Error: malloc failed\n");
 		exit(EXIT_FAILURE);
 	}
-	if (isdigit(arg) == 0 && arg != NULL)
+
+	if (arg != NULL && isdigit(arg[0]) != 0)
 	{
 		converted_arg = atoi(arg);
 	}
@@ -29,4 +30,64 @@ void _push(stack_t **stack, unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 	add_dnodeint(stack, converted_arg);
+}
+
+/**
+ * _pop - pushes an element to the stack.
+ * @stack: doubly linked list from which the element is popped
+ * @line_number: the line number in the monty script
+ *
+ * Return: Nothing
+ */
+void _pop(stack_t **stack, unsigned int line_number)
+{
+	if (*stack == NULL)
+	{
+		fprintf(stderr, "L%u: can't pop and empty stack\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+
+	stack_t *temp = *stack;
+	*stack = (*stack)->next;
+
+	if (*stack != NULL)
+		(*stack)->prev = NULL;
+
+	free(temp);
+}
+
+/**
+ * _pall - pushes an element to the stack.
+ * @stack: doubly linked list to which the element is pushed
+ * @line_number: the line number in the monty script
+ *
+ * Return: Nothing
+ */
+void _pall(stack_t **stack, unsigned int line_number)
+{
+	stack_t *node = *stack;
+	(void)line_number;
+	while (node != NULL)
+	{
+		printf("%d\n", node->n);
+		node = node->next;
+	}
+}
+
+/**
+ * _pint - prints the element at the top of the stack.
+ * @stack: doubly linked list to which the element is pushed
+ * @line_number: the line number in the monty script
+ *
+ * Return: Nothing
+ */
+void _pint(stack_t **stack, unsigned int line_number)
+{
+	if (*stack == NULL)
+	{
+		fprintf(stderr, "L%u: can't pint, stack empty\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+
+	printf("%d\n", (*stack)->n);
 }

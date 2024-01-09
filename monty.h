@@ -44,11 +44,12 @@ typedef struct instruction_s
 typedef void (*opcode_func)(stack_t **stack, unsigned int line_number);
 
 /* monty.c */
-void read_file(char* filename, stack_t **stack);
+void read_file(FILE *filePtr, stack_t **stack);
 opcode_func get_op_func(char *str);
 
 /* opcodes.c */
 void _push(stack_t **stack, unsigned int line_number);
+void _pall(stack_t **stack, unsigned int line_number);
 
 /* list_func.c */
 stack_t *add_dnodeint_end(stack_t **head, const int n);
