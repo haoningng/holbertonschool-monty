@@ -12,7 +12,7 @@ void _push(stack_t **stack, unsigned int line_number)
 	char *arg = global_variables->command_arg;
 	int converted_arg;
 
-	if (arg == NULL || isdigit(arg[0]) == 0)
+	if (arg == NULL || isAllDigits(arg) == 0)
 	{
 		fprintf(stderr, "L%d: usage: push integer\n", line_number);
 		free_resources();

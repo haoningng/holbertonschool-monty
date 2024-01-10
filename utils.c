@@ -55,3 +55,21 @@ void free_resources(void)
 		global_variables = NULL;
 	}
 }
+
+/**
+ * isAllDigits - checks if all characters in a string are valid digits
+ * @numStr: pointer to char representing the string to be checked
+ * Return: 0 if any character is not a valid digit, 1 otherwise
+ */
+int isAllDigits(char *numStr)
+{
+	while (*numStr != '\0')
+	{
+		if (isdigit(*numStr) == 0)
+		{
+			return 0;
+		}
+		numStr++;
+	}
+	return 1;
+}
