@@ -69,15 +69,15 @@ int isAllDigits(char *numStr)
 	}
 
 	if (*numStr == '\0')
-		return 0;
+		return (0);
 
 	while (*numStr != '\0')
 	{
 		if (isdigit(*numStr) == 0)
 		{
-			return 0;
+			return (0);
 		}
 		numStr++;
 	}
-	return 1;
+	return (1);
 }
