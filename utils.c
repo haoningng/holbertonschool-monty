@@ -6,6 +6,7 @@
 void initialize_global_vars(void)
 {
 	global_variables = (global_t *)malloc(sizeof(global_t));
+
 	if (global_variables == NULL)
 	{
 		fprintf(stderr, "Error: malloc failed\n");

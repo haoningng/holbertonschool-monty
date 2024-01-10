@@ -51,7 +51,6 @@ typedef struct
 } global_t;
 
 extern global_t *global_variables;
-extern char(args);
 
 typedef void (*opcode_func)(stack_t **stack, unsigned int line_number);
 
@@ -72,4 +71,5 @@ void add_dnodeint(stack_t **head, const int n);
 void free_dlistint(stack_t *head);
 void initialize_global_vars(void);
 void free_resources(void);
+
 #endif

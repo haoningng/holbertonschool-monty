@@ -7,6 +7,7 @@ void read_file(void)
 {
 	size_t n = 0;
 	opcode_func func;
+
 	global_t *gvars = global_variables;
 
 	while (getline(&(gvars->buffer), &n, gvars->filePtr) != -1)
@@ -46,12 +47,14 @@ void read_file(void)
 opcode_func get_op_func(char *str)
 {
 	int i;
+
 	instruction_t opcode_array[] = {
 		{"push", _push},
 		{"pall", _pall},
 		{"pint", _pint},
 		{NULL, NULL}};
 	i = 0;
+
 	while (opcode_array[i].f != NULL && strcmp(opcode_array[i].opcode, str) != 0)
 	{
 		i++;
