@@ -11,7 +11,7 @@ char *arg = NULL;
 void read_file(FILE *filePtr, stack_t **stack)
 {
 
-	char *buffer = NULL, *line, *token;
+	char *buffer = NULL, *line, *command;
 	size_t n = 0;
 	int line_number = 1;
 	opcode_func func;
@@ -20,21 +20,19 @@ void read_file(FILE *filePtr, stack_t **stack)
 	{
 		line = strtok(buffer, "\n");
 		(void)line;
-		token = strtok(buffer, " $");
-		while (token != NULL)
+		command = strtok(buffer, " $");
+
+		if (command != NULL)
 		{
-			func = get_op_func(token);
+			func = get_op_func(command);
 			if (func == NULL)
 			{
-				/*printf("func is null\n");*/
-				break;
+				fprintf(stderr, "L%u: unknown instruction %s\n", line_number, command);
+				exit(EXIT_FAILURE);
 			}
 			else
 			{
-				/*printf("func is not null\n");
-				printf("%s\n", token);*/
-				token = strtok(NULL, " $");
-				arg = token;
+				arg = strtok(NULL, " $");
 				func(stack, line_number);
 			}
 		}
