@@ -12,8 +12,6 @@ void _push(stack_t **stack, unsigned int line_number)
 	char *arg = global_variables->command_arg;
 	int converted_arg;
 
-	printf("command: %s\n", global_variables->command);
-	printf("command_arg: %s\n", global_variables->command_arg);
 	if (arg == NULL || (converted_arg = atoi(arg)) == 0)
 	{
 		fprintf(stderr, "L%d: usage: push integer\n", line_number);
@@ -22,7 +20,6 @@ void _push(stack_t **stack, unsigned int line_number)
 	}
 	else
 	{
-		printf("converted_arg: %d\n", converted_arg);
 		add_dnodeint(stack, converted_arg);
 	}
 }
