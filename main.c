@@ -19,6 +19,7 @@ int main(int argc, char **argv)
 	}
 
 	filePtr = fopen(argv[1], "r");
+
 	if (filePtr == NULL)
 	{
 		fprintf(stderr, "Error: Can't open file '%s'\n", argv[1]);

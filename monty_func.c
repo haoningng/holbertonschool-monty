@@ -38,9 +38,19 @@ void read_file(FILE *filePtr, stack_t **stack)
 			else
 			{
 				arg = strtok(NULL, " $");
+				if (arg == NULL && strcmp(command, "push"))
+				{
+					fprintf(stderr, "L%d: usage: push integer\n", line_number);
+					free(buffer);
+					buffer = NULL;
+					fclose(filePtr);
+					free_dlistint(*stack);
+					exit(EXIT_FAILURE);
+				}
 				func(stack, line_number);
 				arg = NULL;
 			}
+
 			command = NULL;
 		}
 		line_number++;
