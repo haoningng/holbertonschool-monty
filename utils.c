@@ -63,6 +63,14 @@ void free_resources(void)
  */
 int isAllDigits(char *numStr)
 {
+	if (*numStr == '-' || *numStr == '+')
+	{
+		numStr++;
+	}
+
+	if (*numStr == '\0')
+		return 0;
+
 	while (*numStr != '\0')
 	{
 		if (isdigit(*numStr) == 0)

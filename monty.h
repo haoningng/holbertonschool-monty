@@ -71,5 +71,6 @@ void add_dnodeint(stack_t **head, const int n);
 void free_dlistint(stack_t *head);
 void initialize_global_vars(void);
 void free_resources(void);
+int isAllDigits(char *);
 
 #endif
