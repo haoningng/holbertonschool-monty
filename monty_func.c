@@ -28,6 +28,7 @@ void read_file(FILE *filePtr, stack_t **stack)
 			if (func == NULL)
 			{
 				fprintf(stderr, "L%u: unknown instruction %s\n", line_number, command);
+				free(buffer);
 				exit(EXIT_FAILURE);
 			}
 			else
