@@ -18,10 +18,6 @@ void _push(stack_t **stack, unsigned int line_number)
 	else
 	{
 		fprintf(stderr, "L%d: usage: push integer\n", line_number);
-		if (*stack == NULL)
-		{
-			free_dlistint(*stack);
-		}
 		exit(EXIT_FAILURE);
 	}
 	add_dnodeint(stack, converted_arg);
@@ -80,7 +76,7 @@ void _pint(stack_t **stack, unsigned int line_number)
 {
 	if (*stack == NULL)
 	{
-		fprintf(stderr, "L%d: can't pint, stack empty\n", line_number);
+		fprintf(stderr, "L%u: can't pint, stack empty\n", line_number);
 		exit(EXIT_FAILURE);
 	}
 
