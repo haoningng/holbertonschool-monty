@@ -1,5 +1,7 @@
 #include "monty.h"
 
+global_t *global_variables = NULL;
+
 /**
  * main - entry point
  * @argc: number of variable arguments
@@ -9,8 +11,6 @@
  */
 int main(int argc, char **argv)
 {
-	FILE *filePtr;
-	stack_t *stack = NULL;
 
 	if (argc != 2)
 	{
@@ -18,16 +18,16 @@ int main(int argc, char **argv)
 		exit(EXIT_FAILURE);
 	}
 
-	filePtr = fopen(argv[1], "r");
+	initialize_global_vars();
+	global_variables->filePtr = fopen(argv[1], "r");
 
-	if (filePtr == NULL)
+	if (global_variables->filePtr == NULL)
 	{
 		fprintf(stderr, "Error: Can't open file '%s'\n", argv[1]);
 		exit(EXIT_FAILURE);
 	}
 
-	read_file(filePtr, &stack);
-	free_dlistint(stack);
-	fclose(filePtr);
+	read_file();
+	free_resources();
 	return (0);
 }

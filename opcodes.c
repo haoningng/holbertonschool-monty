@@ -9,12 +9,13 @@
  */
 void _push(stack_t **stack, unsigned int line_number)
 {
+	char *arg = global_variables->command_arg;
 	int converted_arg;
 
 	if (arg == NULL || isdigit(arg[0]) == 0)
 	{
 		fprintf(stderr, "L%d: usage: push integer\n", line_number);
-		free_dlistint(*stack);
+		free_resources();
 		exit(EXIT_FAILURE);
 	}
 	else
@@ -36,6 +37,7 @@ void _pop(stack_t **stack, unsigned int line_number)
 	if (*stack == NULL)
 	{
 		fprintf(stderr, "L%u: can't pop and empty stack\n", line_number);
+		free_resources();
 		exit(EXIT_FAILURE);
 	}
 
@@ -78,6 +80,7 @@ void _pint(stack_t **stack, unsigned int line_number)
 	if (*stack == NULL)
 	{
 		fprintf(stderr, "L%u: can't pint, stack empty\n", line_number);
+		free_resources();
 		exit(EXIT_FAILURE);
 	}
 

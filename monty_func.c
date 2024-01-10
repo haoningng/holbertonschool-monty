@@ -1,57 +1,39 @@
 #include "monty.h"
 
-size_t BUFFER_LENGTH = 2064;
-char *arg = NULL;
-
 /**
  * read_file - reads a bytecode file and runs command
- * @filename: pathname to file
- * @stack: pointer to the top of the stack
  */
-void read_file(FILE *filePtr, stack_t **stack)
+void read_file(void)
 {
-
-	char *buffer = NULL, *line;
-	char *command = NULL;
 	size_t n = 0;
-	int line_number = 1;
 	opcode_func func;
+	global_t *gvars = global_variables;
 
-	while (getline(&buffer, &n, filePtr) != -1)
+	while (getline(&(gvars->buffer), &n, gvars->filePtr) != -1)
 	{
-		line = strtok(buffer, "\n");
-		(void)line;
-		command = strtok(buffer, " $");
+		gvars->line = strtok(gvars->buffer, "\n");
+		gvars->command = strtok(gvars->line, " $");
 
-		if (command != NULL)
+		if (gvars->command != NULL)
 		{
-			func = get_op_func(command);
+			func = get_op_func(gvars->command);
 			if (func == NULL)
 			{
-				fprintf(stderr, "L%u: unknown instruction %s\n", line_number, command);
-				free(buffer);
-				buffer = NULL;
-				fclose(filePtr);
-				free_dlistint(*stack);
+				fprintf(stderr, "L%u: unknown instruction %s\n",
+						gvars->line_number, gvars->command);
+				free_resources();
 				exit(EXIT_FAILURE);
 			}
 			else
 			{
-				arg = strtok(NULL, " $");
-				func(stack, line_number);
-				arg = NULL;
+				gvars->command_arg = strtok(NULL, " $");
+				func(&(gvars->stack), gvars->line_number);
+				gvars->command_arg = NULL;
 			}
 
-			command = NULL;
+			gvars->command = NULL;
 		}
-		line_number++;
-	}
-
-	(void)func;
-	(void)stack;
-	if (buffer != NULL)
-	{
-		free(buffer);
+		(gvars->line_number)++;
 	}
 }
 
@@ -68,10 +50,6 @@ opcode_func get_op_func(char *str)
 		{"push", _push},
 		{"pall", _pall},
 		{"pint", _pint},
-		/*{"pop", _pop},
-		{"swap", _swap},
-		{"add", _add},
-		{"nop", _nop}, */
 		{NULL, NULL}};
 	i = 0;
 	while (opcode_array[i].f != NULL && strcmp(opcode_array[i].opcode, str) != 0)
