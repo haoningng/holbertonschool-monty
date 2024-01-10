@@ -12,7 +12,7 @@ void _push(stack_t **stack, unsigned int line_number)
 	char *arg = global_variables->command_arg;
 	int converted_arg;
 
-	if (arg == NULL || (converted_arg = atoi(arg)) == 0)
+	if (arg == NULL || isdigit(arg[0]) == 0)
 	{
 		fprintf(stderr, "L%d: usage: push integer\n", line_number);
 		free_resources();
@@ -20,6 +20,7 @@ void _push(stack_t **stack, unsigned int line_number)
 	}
 	else
 	{
+		converted_arg = atoi(arg);
 		add_dnodeint(stack, converted_arg);
 	}
 }
