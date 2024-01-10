@@ -11,16 +11,17 @@ void _push(stack_t **stack, unsigned int line_number)
 {
 	int converted_arg;
 
-	if (arg != NULL && isdigit(arg[0]) != 0)
+	if (arg == NULL || isdigit(arg[0]) == 0)
 	{
-		converted_arg = atoi(arg);
+		fprintf(stderr, "L%d: usage: push integer\n", line_number);
+		free_dlistint(*stack);
+		exit(EXIT_FAILURE);
 	}
 	else
 	{
-		fprintf(stderr, "L%d: usage: push integer\n", line_number);
-		exit(EXIT_FAILURE);
+		converted_arg = atoi(arg);
+		add_dnodeint(stack, converted_arg);
 	}
-	add_dnodeint(stack, converted_arg);
 }
 
 /**
