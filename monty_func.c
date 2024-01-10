@@ -11,7 +11,8 @@ char *arg = NULL;
 void read_file(FILE *filePtr, stack_t **stack)
 {
 
-	char *buffer = NULL, *line, *command;
+	char *buffer = NULL, *line;
+	char *command = NULL;
 	size_t n = 0;
 	int line_number = 1;
 	opcode_func func;
@@ -29,20 +30,28 @@ void read_file(FILE *filePtr, stack_t **stack)
 			{
 				fprintf(stderr, "L%u: unknown instruction %s\n", line_number, command);
 				free(buffer);
+				buffer = NULL;
+				fclose(filePtr);
+				free_dlistint(*stack);
 				exit(EXIT_FAILURE);
 			}
 			else
 			{
 				arg = strtok(NULL, " $");
 				func(stack, line_number);
+				arg = NULL;
 			}
+			command = NULL;
 		}
 		line_number++;
 	}
 
 	(void)func;
 	(void)stack;
-	free(buffer);
+	if (buffer != NULL)
+	{
+		free(buffer);
+	}
 }
 
 /**
