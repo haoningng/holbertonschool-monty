@@ -39,7 +39,19 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-typedef struct
+/**
+ * struct global_var - global variables
+ * @filePtr: the pointer to file
+ * @line: pointer to each line (i.e. string)
+ * @command: pointer opcode command
+ * @command_arg: pointer the operands following the opcode
+ * @stack: pointer to stack
+ * @buffer: pointer to buffer
+ * @line_number: line_number
+ *
+ * Description: global variables to be used in other files
+ */
+typedef struct global_var
 {
 	FILE *filePtr;
 	char *line;
