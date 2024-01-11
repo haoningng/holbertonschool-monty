@@ -9,14 +9,22 @@
  */
 void _swap(stack_t **stack, unsigned int line_number)
 {
-	if (line_number < 2)
+	int elements_counter = 0;
+	stack_t *temp = *stack;
+
+	while (temp != NULL)
+	{
+		elements_counter++;
+		temp = temp->next;
+	}
+	if (elements_counter < 2)
 	{
 		fprintf(stderr, "L%d: can't swap, stack too short\n", line_number);
 		free_resources();
 		exit(EXIT_FAILURE);
 	}
 
-	stack_t *temp = *stack;
+	temp = *stack;
 	*stack = (*stack)->next;
 	temp->next = (*stack)->next;
 	(*stack)->prev = temp->prev;
@@ -33,14 +41,22 @@ void _swap(stack_t **stack, unsigned int line_number)
  */
 void _add(stack_t **stack, unsigned int line_number)
 {
-	if (line_number < 2)
+	int elements_counter = 0;
+	stack_t *temp = *stack;
+
+	while (temp != NULL)
+	{
+		elements_counter++;
+		temp = temp->next;
+	}
+	if (elements_counter < 2)
 	{
 		fprintf(stderr, "L%d: can't add, stack too short\n", line_number);
 		free_resources();
 		exit(EXIT_FAILURE);
 	}
 
-	stack_t *temp = *stack;
+	temp = *stack;
 	*stack = (*stack)->next;
 	(*stack)->n = (*stack)->n + temp->n;
 	(*stack)->prev = NULL;
