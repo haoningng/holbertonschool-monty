@@ -33,23 +33,18 @@ void _swap(stack_t **stack, unsigned int line_number)
  */
 void _add(stack_t **stack, unsigned int line_number)
 {
-	/*TODO*/
-/*	if (*stack == NULL)
+	if (line_number < 2)
 	{
-		fprintf(stderr, "L%u: can't pop and empty stack\n", line_number);
+		fprintf(stderr, "L%d: can't add, stack too short\n", line_number);
 		free_resources();
 		exit(EXIT_FAILURE);
 	}
 
 	stack_t *temp = *stack;
 	*stack = (*stack)->next;
-
-	if (*stack != NULL)
-		(*stack)->prev = NULL;
-
-	free(temp);*/
-	(void)stack;
-	(void)line_number;
+	(*stack)->n = (*stack)->n + temp->n;
+	(*stack)->prev = NULL;
+	free(temp);
 }
 
 /**
