@@ -52,7 +52,7 @@ void _pop(stack_t **stack, unsigned int line_number)
 
 /**
  * _pall - prints all the values on the stack, starting from the top
- * @stack: doubly linked list to which the element is pushed
+ * @stack: doubly linked list from which the elements are printed
  * @line_number: the line number in the monty script
  *
  * Return: Nothing
@@ -70,7 +70,7 @@ void _pall(stack_t **stack, unsigned int line_number)
 
 /**
  * _pint - prints the element at the top of the stack.
- * @stack: doubly linked list to which the element is pushed
+ * @stack: doubly linked list from which the element is printed
  * @line_number: the line number in the monty script
  *
  * Return: Nothing

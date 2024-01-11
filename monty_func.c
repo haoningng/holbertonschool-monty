@@ -52,6 +52,7 @@ opcode_func get_op_func(char *str)
 		{"push", _push},
 		{"pall", _pall},
 		{"pint", _pint},
+		{"pop", _pop},
 		{NULL, NULL}};
 	i = 0;
 
