@@ -37,12 +37,6 @@ void free_resources(void)
 		global_variables->line = NULL;
 	}
 
-	if (global_variables->command_arg != NULL)
-	{
-		free(global_variables->command_arg);
-		global_variables->command_arg = NULL;
-	}
-
 	if (global_variables->stack != NULL)
 	{
 		free_dlistint(global_variables->stack);
