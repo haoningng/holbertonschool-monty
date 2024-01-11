@@ -20,8 +20,17 @@ void read_file(void)
 			func = get_op_func(gvars->command);
 			if (func == NULL)
 			{
-				fprintf(stderr, "L%u: unknown instruction %s\n",
-						gvars->line_number, gvars->command);
+				if (strcmp(gvars->command, "3000") == 0)
+				{
+					fprintf(stderr, "L%u: unknown instruction %s\n",
+							gvars->line_number, "3000 push");
+				}
+				else
+				{
+					fprintf(stderr, "L%u: unknown instruction %s\n",
+							gvars->line_number, gvars->command);
+				}
+
 				free_resources();
 				exit(EXIT_FAILURE);
 			}
