@@ -1,32 +1,33 @@
 #include "monty.h"
 
-arg_t *arguments;
+global_t *global_variables = NULL;
 
+/**
+ * main - entry point
+ * @argc: number of variable arguments
+ * @argv: the array of arguments
+ *
+ * Return: 0 if successful
+ */
 int main(int argc, char **argv)
 {
-	size_t n = 0;
-	(void)argv;
 
 	if (argc != 2)
 	{
-		dprintf(2, "USAGE: monty file\n");
+		fprintf(stderr, "USAGE: monty file\n");
 		exit(EXIT_FAILURE);
 	}
 
-	initialize_arguments();
-	get_stream(argv[1]);
+	initialize_global_vars();
+	global_variables->filePtr = fopen(argv[1], "r");
 
-	while (getline(&arguments->line, &n, arguments->stream) != -1)
+	if (global_variables->filePtr == NULL)
 	{
-		arguments->line_number += 1;
-		// printf("Line %d: %s", arguments->line_number, arguments->line);
-		tokenize_line();
-		get_instruction();
-		run_instruction();
-		free_tokens();
+		fprintf(stderr, "Error: Can't open file '%s'\n", argv[1]);
+		exit(EXIT_FAILURE);
 	}
 
-	close_stream();
-	free_arguments();
+	read_file();
+	free_resources();
 	return (0);
 }
