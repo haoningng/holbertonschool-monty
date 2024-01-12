@@ -10,6 +10,7 @@ void initialize_global_vars(void)
 	if (global_variables == NULL)
 	{
 		fprintf(stderr, "Error: malloc failed\n");
+		exit(EXIT_FAILURE);
 	}
 	global_variables->filePtr = NULL;
 	global_variables->line = NULL;
