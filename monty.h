@@ -20,9 +20,9 @@
  */
 typedef struct stack_s
 {
-	int n;
-	struct stack_s *prev;
-	struct stack_s *next;
+        int n;
+        struct stack_s *prev;
+        struct stack_s *next;
 } stack_t;
 
 /**
@@ -35,61 +35,46 @@ typedef struct stack_s
  */
 typedef struct instruction_s
 {
-	char *opcode;
-	void (*f)(stack_t **stack, unsigned int line_number);
+        char *opcode;
+        void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-/**
- * struct global_var - global variables
- * @filePtr: the pointer to file
- * @line: pointer to each line (i.e. string)
- * @command: pointer opcode command
- * @command_arg: pointer the operands following the opcode
- * @stack: pointer to stack
- * @buffer: pointer to buffer
- * @line_number: line_number
- *
- * Description: global variables to be used in other files
- */
-typedef struct global_var
+typedef struct arg_s
 {
-	FILE *filePtr;
-	char *line;
-	char *command;
-	char *command_arg;
-	stack_t *stack;
-	char *buffer;
-	int line_number;
-} global_t;
+        FILE *stream;
+        char *line;
+        unsigned int line_number;
+        char **tokens;
+        int ntokens;
+        instruction_t *instruction;
+        stack_t *head;
+        unsigned int stack_length;
+} arg_t;
 
-extern global_t *global_variables;
+extern arg_t *arguments;
 
-typedef void (*opcode_func)(stack_t **stack, unsigned int line_number);
-
-/* monty.c */
-void read_file(void);
-/*void read_file(FILE *filePtr, stack_t **stack);*/
-opcode_func get_op_func(char *str);
-
-/* opcodes.c */
+void malloc_failed(void);
+void initialize_arguments(void);
+void getting_stream_failed(char *filename);
+void get_stream(char *filename);
+void free_arguments(void);
+void tokenize_line(void);
+void get_instruction(void);
+void run_instruction(void);
+void free_tokens(void);
+void close_stream(void);
+void free_arguments(void);
 void _push(stack_t **stack, unsigned int line_number);
 void _pop(stack_t **stack, unsigned int line_number);
-void _pall(stack_t **stack, unsigned int line_number);
 void _pint(stack_t **stack, unsigned int line_number);
-
-/* opcodes_2.c */
 void _swap(stack_t **stack, unsigned int line_number);
 void _add(stack_t **stack, unsigned int line_number);
 void _nop(stack_t **stack, unsigned int line_number);
-
-/* list_func.c */
-stack_t *add_dnodeint_end(stack_t **head, const int n);
-void add_dnodeint(stack_t **head, const int n);
-void free_dlistint(stack_t *head);
-
-/* utils.c */
-void initialize_global_vars(void);
-void free_resources(void);
-int isAllDigits(char *);
-
+void _pall(stack_t **stack, unsigned int line_number);
+void invalid_instruction(void);
+void free_head(void);
+void free_stack(stack_t *head);
+int is_number(char *);
+void free_all_args(void);
+void delete_stack_node(void);
 #endif
